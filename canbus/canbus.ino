@@ -151,7 +151,7 @@ void MCP2515_ISR() {
     while (CAN_MSGAVAIL == CAN.checkReceive()) {
         rec = &can_data[can_tail++];
         can_tail %= CAN_QUEUE_SIZE;
-        CAN.readMsgBufID(&rec->id, &rec->len, rec->buf);
+        CAN.readMsgBuf(&rec->id, &rec->len, rec->buf);
     }
 }
 
@@ -192,7 +192,7 @@ void setup() {
     Serial.println("Startup");
 
     while(1) {
-        if (CAN_OK == CAN.begin(CAN_250KBPS)) {
+        if (CAN_OK == CAN.begin(MCP_ANY, CAN_250KBPS, MCP_8MHZ)) {
             Serial.println("CAN BUS Shield init ok!");
             break;
         }
