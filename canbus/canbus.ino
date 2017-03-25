@@ -193,6 +193,7 @@ void setup() {
 
     while(1) {
         if (CAN_OK == CAN.begin(MCP_ANY, CAN_250KBPS, MCP_8MHZ)) {
+            CAN.setMode(MCP_NORMAL);
             Serial.println("CAN BUS Shield init ok!");
             break;
         }
